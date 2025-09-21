@@ -5,19 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>❤️ Te Amo ❤️ by AlexDev</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Para que no se vea el reproductor */
+    #audio {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Canvas -->
   <canvas id="canvas"></canvas>
 
+  <!-- Imágenes -->
   <img id="gif1" src="https://i.pinimg.com/originals/e5/c5/4c/e5c54cd43fd75a7ec5b7cf0f65838ec3.gif" alt="Osito Disparando Corazones">
   <img id="gif2" src="https://i.pinimg.com/originals/e5/c5/4c/e5c54cd43fd75a7ec5b7cf0f65838ec3.gif" alt="Osito Disparando Corazones">
 
+  <!-- 🔊 Reproductor de música oculto -->
+  <audio id="audio" autoplay loop muted>
+    <source src="https://www.dropbox.com/scl/fi/cyiu6bnyccd1nol5iy1mx/Floricienta-Flores-Amarillas-Letra.mp3?rlkey=97izventpa5hvrmxpqffydyj3&st=prxld234&dl=1" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
   <script src="script.js"></script>
+
+  <script>
+    // Intentar iniciar audio automáticamente
+    const audio = document.getElementById('audio');
+
+    // Al primer clic/tap del usuario, quitar mute para que suene
+    function activarAudio() {
+      audio.muted = false;
+      audio.play().catch(err => console.log('Error reproduciendo audio:', err));
+      document.removeEventListener('click', activarAudio);
+      document.removeEventListener('touchstart', activarAudio);
+    }
+
+    document.addEventListener('click', activarAudio);
+    document.addEventListener('touchstart', activarAudio);
+
+    // Asegurar bucle infinito incluso si hay error
+    audio.addEventListener('ended', () => {
+      audio.currentTime = 0;
+      audio.play();
+    });
+  </script>
 
 </body>
 
- <!-- 
+<!-- 
 
 Contáctame:
 
@@ -29,7 +65,7 @@ Contáctame:
 
     * Sigueme en tiktok
  https://www.tiktok.com/@alexx.dev?is_from_webapp=1&sender_device=pc 
- 
+
     *Canal de WhatsApp
  https://whatsapp.com/channel/0029VazQEXq90x2vIdNkrH1p
 
